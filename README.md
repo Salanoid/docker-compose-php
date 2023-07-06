@@ -1,5 +1,7 @@
 # A basic Apache and PHP stack environment built using Docker Compose. It consists of the following:
 
+## (Forked from - [sprintcube/docker-compose-lamp](https://github.com/sprintcube/docker-compose-lamp))
+
 - PHP
 - Apache
 
