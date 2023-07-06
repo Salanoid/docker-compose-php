@@ -2,13 +2,10 @@
 
 ![Landing Page](https://user-images.githubusercontent.com/43859895/141092846-905eae39-0169-4fd7-911f-9ff32c48b7e8.png)
 
-A basic LAMP stack environment built using Docker Compose. It consists of the following:
+A basic Apache and PHP stack environment built using Docker Compose. It consists of the following:
 
 - PHP
 - Apache
-- MySQL
-- phpMyAdmin
-- Redis
 
 As of now, we have several different PHP versions. Use appropriate php version as needed:
 
@@ -90,31 +87,6 @@ _**APACHE_LOG_DIR**_
 This will be used to store Apache logs. The default value for this is `./logs/apache2`.
 
 ---
-
-#### Database
-
----
-
-> For Apple Silicon Users:
-> Please select Mariadb as Database. Oracle doesn't build their SQL Containers for the arm Architecure
-
-_**DATABASE**_
-
-Define which MySQL or MariaDB Version you would like to use.
-
-_**MYSQL_INITDB_DIR**_
-
-When a container is started for the first time files in this directory with the extensions `.sh`, `.sql`, `.sql.gz` and
-`.sql.xz` will be executed in alphabetical order. `.sh` files without file execute permission are sourced rather than executed.
-The default value for this is `./config/initdb`.
-
-_**MYSQL_DATA_DIR**_
-
-This is MySQL data directory. The default value for this is `./data/mysql`. All your MySQL data files will be stored here.
-
-_**MYSQL_LOG_DIR**_
-
-This will be used to store Apache logs. The default value for this is `./logs/mysql`.
 
 ## Web Server
 
@@ -231,10 +203,6 @@ Now, make a breakpoint and run debug.
 
 **Tip!** After theses configurations, you may need to restart container.
 
-## Redis
-
-It comes with Redis. It runs on default port `6379`.
-
 ## SSL (HTTPS)
 
 Support for `https` domains is built-in but disabled by default. There are 3 ways you can enable and configure SSL; `https` on `localhost` being the easiest. If you are trying to recreating a testing environment as close as possible to a production environment, any domain name can be supported with more configuration.
@@ -276,19 +244,3 @@ If you would like your local testing environment to exactly match your productio
 2. Using the `443` example from the vhost file (`config/vhosts/default.conf`), make new rules that match your domain name and certificate file names.
 
 Done. The LAMP container will auto pull in any SSL certificates in `config/ssl` when it starts. As long as you configure the vhosts file correctly and place the SSL certificates in `config/ssl`, any time you turn on your LAMP container `https` will work on your specified domains.
-
-## Contributing
-
-We are happy if you want to create a pull request or help people with their issues. If you want to create a PR, please remember that this stack is not built for production usage, and changes should be good for general purpose and not overspecialized.
-
-> Please note that we simplified the project structure from several branches for each php version, to one centralized master branch. Please create your PR against master branch.
->
-> Thank you!
-
-## Why you shouldn't use this stack unmodified in production
-
-We want to empower developers to quickly create creative Applications. Therefore we are providing an easy to set up a local development environment for several different Frameworks and PHP Versions.
-In Production you should modify at a minimum the following subjects:
-
-- php handler: mod_php=> php-fpm
-- secure mysql users with proper source IP limitations
